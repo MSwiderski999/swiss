@@ -4,21 +4,17 @@
 #include <array>
 #include <cmath>
 
-class Chess{
+class Participant{
     public:
     std::string name = "";
-    float ELO = 0;
     std::vector<float> prev_res;
-    std::vector<Chess*> prev_op;
-
-    Chess(){};
+    std::vector<Participant*> prev_op;
+    bool didBye = false;
 
     void setName(std::string p_Name){
         name = p_Name;
     }
-    void setELO(float p_ELO){
-        ELO = p_ELO;
-    }
+
     float calculatePoints(){
         float points = 0;
         for(float i : prev_res){
@@ -26,6 +22,7 @@ class Chess{
         }
         return points;
     }
+
     unsigned short int numOfWins(){
         unsigned short int wins = 0;
         for(float i : prev_res){
@@ -33,6 +30,33 @@ class Chess{
         }
         return wins;
     }
+
+    bool canBye(){
+        if(didBye)return false;
+        return true;
+    }
+
+    bool ableToPair(Participant* comparing_to){
+        if(std::count(prev_op.begin(), prev_op.end(), comparing_to)){
+            return false;
+        }
+        return true;
+    }
+};
+
+
+
+class Chess : public Participant{
+    public:
+    float ELO = 0;
+    std::vector<Chess*> prev_op;
+
+    Chess(){};
+
+    void setELO(float p_ELO){
+        ELO = p_ELO;
+    }
+
     float calcBuchholtz(){
         float buchholtz = 0;
         for(Chess* opponent : prev_op){
@@ -52,17 +76,19 @@ class Chess{
         }
         return S_B;
     }
-    bool ableToPair(Chess* comparing_to){
-        if(std::count(prev_op.begin(), prev_op.end(), comparing_to)){
-            return false;
-        }
-        return true;
-    }
-    bool canBye(Chess &checked){
-        for(Chess* opp : prev_op){
-            if(opp == &checked)return false;
-        }
-        return true;
+};
+
+
+
+class Football : public Participant{
+    public:
+    float OVR = 0;
+    unsigned int goals_scored = 0;
+    unsigned int goals_lost = 0;
+
+
+    int getGoalDifference(){
+        return goals_scored - goals_lost;
     }
 };
 /*template <size_t N>
@@ -130,10 +156,10 @@ int main(){
         if(byeNeeded){
             pairings.insert(pairings.begin(), &bye);
             for(int j = size - 1; j >= 0; j--){
-                if(players[j].canBye(bye)){
-                    std::cout<<players[j].name;
+                if(players[j].canBye()){
                     pairings.insert(pairings.begin(), &players[j]);
                     players[j].prev_op.push_back(&bye);
+                    players[j].didBye = true;
                     break;
                 }
             }
