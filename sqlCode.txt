@@ -1,0 +1,74 @@
+use football;
+
+create table players(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	last_name VARCHAR(30),
+    first_name VARCHAR(30),
+    nickname VARCHAR(15),
+    `position` CHAR(2),
+    nation_id CHAR(3),
+    national_team_rank ENUM("starting","bench") DEFAULT NULL,
+    club_id INT,
+    club_rank ENUM("starting","bench") DEFAULT NULL
+);
+alter table players
+add constraint player_national_team_fk
+foreign key (nation_id) references national_teams(`code`);
+alter table players
+add constraint player_club_fk
+foreign key (club_id) references clubs(id);
+
+create table clubs(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(50),
+    short_name VARCHAR(20),
+    `code` CHAR(3),
+    league_id INT,
+    coefficient DECIMAL(10,3),
+    strength_estimate INT CHECK(strength_estimate<=20 and strength_estimate>=0)
+);
+alter table clubs
+add constraint club_league_fk
+foreign key (league_id) REFERENCES leagues(id);
+
+create table leagues(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(30),
+    country_id INT,
+    tier INT4
+);
+alter table leagues
+add constraint league_country_fk
+foreign key (country_id) REFERENCES countries(id);
+
+create table countries(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(30) NOT NULL,
+    federation ENUM("AFC","CAF","CONCACAF","CONMEBOL","OFC","UEFA")
+);
+alter table countries
+add constraint countries_federation_fk
+foreign key (federation) REFERENCES federations(`code`);
+
+create table national_teams(
+	`code` CHAR(3) NOT NULL PRIMARY KEY,
+    `name` VARCHAR(30) NOT NULL,
+    elo DECIMAL(6,2),
+    strength_estimate INT CHECK(strength_estimate<=20 and strength_estimate>=0),
+    federation ENUM("AFC","CAF","CONCACAF","CONMEBOL","OFC","UEFA")
+);
+alter table national_teams
+add constraint national_team_federation_fk 
+FOREIGN KEY (federation) REFERENCES federations(`code`);
+
+create table federations(
+	`code` ENUM("AFC","CAF","CONCACAF","CONMEBOL","OFC","UEFA") PRIMARY KEY,
+    region ENUM("Oceania","North America","South America","Europe","Africa","Asia")
+);
+
+create table positions(
+	id CHAR(2) PRIMARY KEY,
+    cfs_ratio INT
+);
+
+
