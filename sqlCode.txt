@@ -72,3 +72,55 @@ create table positions(
 );
 
 
+
+use football;
+insert into countries(`code`,`name`,elo,strength_estimate,federation)
+values
+("KSA","Saudi Arabia",,,"AFC"),
+("VEN","Venezuela",,,"CONMEBOL"),
+("FIN","Finland",,,"UEFA"),
+("BIH","Bosnia and Herzegovina",,,"UEFA"),
+("PAN","Panama",,,"CONCACAF"),
+("SVN","Slovenia",,,"UEFA"),
+("GHA","Ghana",,,"CAF"),
+("QAT","Qatar",,,"AFC"),
+("NIR","Northern Ireland",,,"UEFA"),
+("JAM","Jamaica",,,"CONCACAF"),
+("ISL","Iceland",,,"UEFA"),
+("MKD","North Macedonia",,,"UEFA"),
+("RSA","South Africa",,,"CAF"),
+("IRQ","Iraq",,,"AFC"),
+("ALB","Albania",,,"UEFA"),
+("MNE","Montenegro",,,"UEFA"),
+("COD","Congo DR",,,"CAF"),
+("CPV","Cabo Verde",,,"CAF"),
+("UAE","United Arab Emirates",,,"AFC"),
+("OMA","Oman",,,"AFC"),
+("UZB","Uzbekistan",,,"AFC"),
+("SLV","El Salvador",,,"CONCACAF"),
+("BUL","Bulgaria",,,"UEFA"),
+("GEO","Georgia",,,"UEFA"),
+("ISR","Israel",,,"UEFA"),
+("GUI","Guinea",,,"CAF"),
+("HON","Honduras",,,"CONCACAF"),
+("CHN","China PR",,,"AFC"),
+("GAB","Gabon",,,"CAF"),
+("BOL","Bolivia",,,"CONMEBOL"),
+("JOR","Jordan",,,"AFC"),
+("BHR","Bahrain",,,"AFC"),
+("ZAM","Zambia",,,"CAF"),
+("HAI","Haiti",,,"CONCACAF"),
+("CUW","Curacao",,,"CONCACAF"),
+("UGA","Uganda",,,"CAF"),
+("SYR","Syria",,,"AFC"),
+("LUX","Luxembourg",,,"UEFA"),
+("BEN","Benin",,,"CAF"),
+("PLE","Palestine",,,"AFC"),
+("EQG","Equatorial Guinea",,,"CAF"),
+("VIE","Vietnam",,,"AFC"),
+("KGZ","Kyrgyz Republic",,,"AFC"),
+("BLR","Belarus",,,"UEFA"),
+("LBN","Lebanon",,,"AFC"),
+("NZL","New Zealand",,,"OFC")
+
+
