@@ -5,35 +5,51 @@
 #include <cmath>
 #include "participant.cpp"
 
-enum pref{left2, left1, right2, right1};
-
 class Football : public Participant{
     public:
-    float OVR = 0;
-    unsigned int goals_scored = 0;
-    unsigned int goals_lost = 0;
-    pref seeking;
+    int OVR = 0;
+    std::vector<unsigned short int> goals_for;
+    std::vector<unsigned short int> goals_against;
 
+    Football(std::string pName, int pOVR, float pElo) {
+        name = pName;
+        OVR = pOVR;
+        elo = pElo;
+    }
     int getGoalDifference(){
-        return goals_scored - goals_lost;
+        int res = 0;
+        for (auto i : goals_for) {
+            res += i;
+        }
+        for (auto i : goals_against) {
+            res -= i;
+        }
+        return res;
+    }
+    float getPoints() {
+        float points = 0;
+        for (unsigned short int i = 0; i < goals_for.size(); i++) {
+            if (goals_for[i] > goals_against[i]) {
+                points += 3;
+            }else if (goals_for[i] == goals_against[i]){ points++; }
+        }
+        return points;
+    }
+    static std::vector<std::vector<Football>> getPointGroups(std::vector<Football> teams_vector) {
+        std::vector<std::vector<Football>> all_groups;
+        std::vector<Football> group;
+        float comparator = teams_vector[0].getPoints();
+        for (int i = 0; i < teams_vector.size(); i++) {
+            if (teams_vector[i].getPoints() == comparator) {
+            }
+            else {
+                if(i < teams_vector.size())comparator = teams_vector[i].getPoints();
+                all_groups.push_back(group);
+                group.clear();
+            }
+            group.push_back(teams_vector[i]);
+        }
+        all_groups.push_back(group);
+        return all_groups;
     }
 };
-
-std::vector<Football> pair(std::vector<Football> table){
-    std::vector<int> pointGroups;
-    int groupSize = 1;
-    int currPointGroup;
-    for(Football i : table){
-        
-    }
-}
-int main(){
-    std::setlocale(LC_ALL, "pl.utf-8");
-    std::cout << "Set number of rounds:\n";
-    
-    unsigned short int numOfRounds;
-    std::cin >> numOfRounds;
-    unsigned short int round = 1;
-
-
-}

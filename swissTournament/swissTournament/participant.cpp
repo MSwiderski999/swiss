@@ -5,22 +5,25 @@
 class Participant{
     public:
     std::string name = "";
-    std::vector<float> prev_res;
     std::vector<Participant*> prev_op;
     bool didBye = false;
+    short int seeking = 0;
+    float elo;
 
-    void setName(std::string p_Name){
-        name = p_Name;
+    bool ableToPair(Participant* comparing_to) {
+        if (std::count(prev_op.begin(), prev_op.end(), comparing_to)) {
+            return false;
+        }
+        return true;
     }
-
-    float calculatePoints(){
+    /*float calculatePoints() {
         float points = 0;
         for(float i : prev_res){
             points += i;
         }
         return points;
     }
-
+    
     unsigned short int numOfWins(){
         unsigned short int wins = 0;
         for(float i : prev_res){
@@ -34,10 +37,7 @@ class Participant{
         return true;
     }
 
-    bool ableToPair(Participant* comparing_to){
-        if(std::count(prev_op.begin(), prev_op.end(), comparing_to)){
-            return false;
-        }
-        return true;
-    }
+    */
 };
+
+

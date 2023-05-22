@@ -5,16 +5,16 @@
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
 #include <cppconn/prepared_statement.h>
-using namespace std;
+#include "football.cpp"
 
-//for demonstration only. never save your password in the code!
-const string server = "tcp://127.0.0.1:3306";
-const string username = "root";
-const string password = "mikolaj";
+const std::string server = "tcp://127.0.0.1:3306";
+const std::string username = "root";
+const std::string password = "mikolaj";
 
 int main()
 {
-    int randomNumber = 3;
+    std::setlocale(LC_ALL, "pl.utf-8");
+
     sql::Driver* driver;
     sql::Connection* con;
     sql::Statement* stmt;
@@ -27,17 +27,22 @@ int main()
     }
     catch (sql::SQLException e)
     {
-        cout << "Could not connect to server. Error message: " << e.what() << endl;
+        std::cout << "Could not connect to server. Error message: " << e.what() << std::endl;
         system("pause");
         exit(1);
     }
     con->setSchema("football");
     stmt = con->createStatement();
-    res = stmt->executeQuery("SELECT name FROM countries");
-
+    std::vector<Football> teams;
+    res = stmt->executeQuery("SELECT name, strength_estimate, elo FROM countries ORDER BY 3 DESC");
     while (res->next()) {
-        cout << res->getString(1) << endl;
+        teams.push_back(Football(res->getString(1), res->getInt(2), res->getDouble(3)));
     }
+
+    ////pairing////
+    ///////////////
+    //////////////
+
     system("pause");
     return 0;
 }
