@@ -9,13 +9,13 @@
 
 class Participant{
     public:
-    std::string name;
+    std::string name = "";
     std::vector < std::string > prev_op;
     bool didBye = false;
     float elo, points = 0;
 
     bool ableToPair(Participant* comparing_to) {
-        if (std::count(prev_op.begin(), prev_op.end(), comparing_to)) {
+        if (std::count(prev_op.begin(), prev_op.end(), comparing_to->name)) {
             return false;
         }
         return true;

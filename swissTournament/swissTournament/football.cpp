@@ -15,7 +15,6 @@ class Football : public Participant{
         OVR = pOVR;
         elo = pElo;
     }
-
     float updatePoints(int goals_for, int goals_against) {
         if (goals_for > goals_against)points += 3;
         else if (goals_for == goals_against)points++;
