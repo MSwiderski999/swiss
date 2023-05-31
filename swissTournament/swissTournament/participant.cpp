@@ -2,13 +2,17 @@
 #include <vector>
 #include <algorithm>
 
+#include "mysql_connection.h"
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/prepared_statement.h>
+
 class Participant{
     public:
-    std::string name = "";
-    std::vector<Participant*> prev_op;
+    std::string name;
+    std::vector < std::string > prev_op;
     bool didBye = false;
-    short int seeking = 0;
-    float elo;
+    float elo, points = 0;
 
     bool ableToPair(Participant* comparing_to) {
         if (std::count(prev_op.begin(), prev_op.end(), comparing_to)) {

@@ -1,11 +1,12 @@
-﻿  football.cpp
-  main.cpp
-C:\Users\mikol\Desktop\swiss\swissTournament\swissTournament\main.cpp(39,83): warning C4244: 'argument': conversion from 'long double' to 'float', possible loss of data
+﻿  main.cpp
+C:\Users\mikol\Desktop\swiss\swissTournament\swissTournament\football.cpp(46,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\mikol\Desktop\swiss\swissTournament\swissTournament\main.cpp(44,83): warning C4244: 'argument': conversion from 'long double' to 'float', possible loss of data
+  participant.cpp
      Creating library C:\Users\mikol\Desktop\swiss\swissTournament\x64\Release\swissTournament.lib and object C:\Users\mikol\Desktop\swiss\swissTournament\x64\Release\swissTournament.exp
   Generating code
-  1 of 391 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  145 of 230 functions (63.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    16 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 mysqlcppconn-static.lib(mysql_driver.obj) : warning LNK4099: PDB '' was not found with 'mysqlcppconn-static.lib(mysql_driver.obj)' or at ''; linking object as if no debug info
 mysqlcppconn-static.lib(mysql_connection.obj) : warning LNK4099: PDB '' was not found with 'mysqlcppconn-static.lib(mysql_connection.obj)' or at ''; linking object as if no debug info

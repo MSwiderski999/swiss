@@ -15,6 +15,7 @@ int main()
 {
     std::setlocale(LC_ALL, "pl.utf-8");
 
+    //connect to football database
     sql::Driver* driver;
     sql::Connection* con;
     sql::Statement* stmt;
@@ -33,15 +34,15 @@ int main()
     }
     con->setSchema("football");
     stmt = con->createStatement();
+
+    //create the matches table
+
+    //initialize the list of participants
     std::vector<Football> teams;
     res = stmt->executeQuery("SELECT name, strength_estimate, elo FROM countries ORDER BY 3 DESC");
     while (res->next()) {
         teams.push_back(Football(res->getString(1), res->getInt(2), res->getDouble(3)));
     }
-
-    ////pairing////
-    ///////////////
-    //////////////
 
     system("pause");
     return 0;
